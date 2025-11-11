@@ -1,0 +1,31 @@
+const sqlite = require("sqlite3").verbose();
+const db = new sqlite.Database("./lab.db");
+
+// Auto create tables if not exist
+db.serialize(() => {
+  db.run(`
+    CREATE TABLE IF NOT EXISTS users (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      fullName TEXT,
+      dob TEXT,
+      email TEXT,
+      phone TEXT,
+      address TEXT,
+      idNumber TEXT,
+      password TEXT,
+      idFilePath TEXT
+    )
+  `);
+
+  db.run(`
+    CREATE TABLE IF NOT EXISTS transactions (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      userId INTEGER,
+      amount REAL,
+      receiver TEXT,
+      timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+    )
+  `);
+});
+
+module.exports = db;

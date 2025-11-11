@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - LabBank</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="app.js"></script>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="container nav-flex">
+    <h2 class="logo">LabBank</h2>
+  </div>
+</header>
+
+<div class="auth-container">
+  <h2>Net Banking Login</h2>
+  <p class="subtitle">Enter your credentials to continue</p>
+
+  <form id="loginForm" class="auth-form">
+    <label>Customer ID / Email</label>
+    <input type="text" id="loginIdentifier" required placeholder="Enter Customer ID or Email" />
+
+    <label>Password</label>
+    <input type="password" id="loginPassword" required placeholder="Enter Password" />
+
+    <button type="submit" class="btn-primary full">Login</button>
+    <p id="login-msg" class="msg"></p>
+  </form>
+
+  <p class="switch-screen">
+    New user? <a href="register.html">Create account</a>
+  </p>
+</div>
+
+</body>
+</html>

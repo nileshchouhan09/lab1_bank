@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Investments - LabBank</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    .invest-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:18px; }
+    .inv-card{ background:#fff;padding:16px;border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+  </style>
+</head>
+<body>
+<header class="navbar">
+  <div class="container nav-flex">
+    <h2 class="logo">LabBank</h2>
+    <nav>
+      <a href="personal.html">Personal</a>
+      <a href="corporate.html">Corporate</a>
+      <a href="loans.html">Loans</a>
+      <a href="investments.html">Investments</a>
+      <a href="login.html" class="btn-login">Net Banking</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container" style="padding:28px 0;">
+  <h1>Investments — Products</h1>
+
+  <!-- ========== VULN: Open Redirect pattern ===========
+       The 'next' parameter is used to redirect after sign-in without validation (open-redirect).
+       Example: investments.html?next=https://evil.example -> insecure redirect.
+  -->
+  <div style="margin-top:12px; background:#fff; padding:14px; border-radius:10px;">
+    <p>Login to view personalized recommendations.</p>
+    <a id="loginRedirect" href="login.html">Login</a>
+    <script>
+      // intentionally create a redirect link that uses 'next' param unsafely
+      const p = new URLSearchParams(location.search).get('next');
+      if(p){
+        // vulnerable open-redirect pattern: link points to arbitrary next param
+        document.getElementById('loginRedirect').setAttribute('href', 'login.html?next=' + encodeURIComponent(p));
+        document.write('<div style="color:#8b0000;margin-top:8px;">VULN: open redirect param present</div>');
+      }
+    </script>
+  </div>
+
+  <!-- ========== CSV Upload + client-side display (possible stored XSS if processed server-side) ========= -->
+  <div style="margin-top:18px;">
+    <h3>Upload investment CSV (for import)</h3>
+    <input type="file" id="csvUpload" accept=".csv" />
+    <div id="csvPreview" style="margin-top:12px;"></div>
+
+    <script>
+      // client-side preview (intentionally naive, no sanitization)
+      document.getElementById('csvUpload').addEventListener('change', function(e){
+        const f = e.target.files[0];
+        if(!f) return;
+        const reader = new FileReader();
+        reader.onload = function(){
+          // display raw CSV — in a real app this must be parsed and sanitized on server
+          document.getElementById('csvPreview').innerText = reader.result.slice(0,1000);
+        };
+        reader.readAsText(f);
+      });
+    </script>
+  </div>
+
+  <div class="invest-grid">
+    <div class="inv-card">
+      <h4>Mutual Funds</h4>
+      <p>Balanced funds, SIP available.</p>
+      <img src="https://picsum.photos/seed/i1/600/300" style="max-width:100%; border-radius:8px; margin-top:8px;" />
+    </div>
+    <div class="inv-card">
+      <h4>Fixed Deposits</h4>
+      <p>Safe and steady returns.</p>
+      <img src="https://picsum.photos/seed/i2/600/300" style="max-width:100%; border-radius:8px; margin-top:8px;" />
+    </div>
+    <div class="inv-card">
+      <h4>Stocks</h4>
+      <p>Market linked investments.</p>
+      <img src="https://picsum.photos/seed/i3/600/300" style="max-width:100%; border-radius:8px; margin-top:8px;" />
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container footer-grid">
+    <div><h3>Banking</h3><a>Savings</a><a>Cards</a></div>
+    <div><h3>Support</h3><a>Contact</a><a>Care</a></div>
+    <div><h3>Links</h3><a>Terms</a><a>Privacy</a></div>
+  </div>
+  <p class="footer-copy">© 2025 LabBank — LAB USE ONLY</p>
+</footer>
+</body>
+</html>

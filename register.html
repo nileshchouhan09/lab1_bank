@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register - LabBank</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="app.js"></script>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="container nav-flex">
+    <h2 class="logo">LabBank</h2>
+  </div>
+</header>
+
+<div class="auth-container wider">
+  <h2>Open Account</h2>
+  <p class="subtitle">Fill the form to complete onboarding</p>
+
+  <form id="registerForm" class="auth-form" enctype="multipart/form-data">
+
+    <label>Full Name*</label>
+    <input type="text" id="regName" required />
+
+    <label>Date of Birth*</label>
+    <input type="date" id="regDob" required />
+
+    <label>Mobile Number*</label>
+    <input type="text" id="regPhone" required />
+
+    <label>Email*</label>
+    <input type="email" id="regEmail" required />
+
+    <label>Address*</label>
+    <textarea id="regAddress" required></textarea>
+
+    <label>ID Proof Number (PAN/Aadhaar/Passport)*</label>
+    <input type="text" id="regIdNumber" required />
+
+    <label>Upload ID Proof (PDF/JPG/PNG)*</label>
+    <input type="file" id="regIdFile" required accept=".pdf,.jpg,.jpeg,.png" />
+
+    <label>Password*</label>
+    <input type="password" id="regPassword" required />
+
+    <label>Confirm Password*</label>
+    <input type="password" id="regPasswordConfirm" required />
+
+    <button type="submit" class="btn-primary full">Submit</button>
+    <p id="register-msg" class="msg"></p>
+
+  </form>
+
+  <p class="switch-screen">
+    Already have an account? <a href="login.html">Login</a>
+  </p>
+</div>
+
+</body>
+</html>

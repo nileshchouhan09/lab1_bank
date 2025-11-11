@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Corporate Banking - LabBank</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    .announcements{ background:#fff; padding:18px; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+    .emp-table { width:100%; border-collapse:collapse; margin-top:14px; }
+    .emp-table th, .emp-table td{ padding:10px; border-bottom:1px solid #eee; text-align:left; }
+    .vuln { color:#8b0000; font-weight:700; }
+  </style>
+</head>
+<body>
+<header class="navbar">
+  <div class="container nav-flex">
+    <h2 class="logo">LabBank</h2>
+    <nav>
+      <a href="personal.html">Personal Banking</a>
+      <a href="corporate.html">Corporate</a>
+      <a href="loans.html">Loans</a>
+      <a href="investments.html">Investments</a>
+      <a href="login.html" class="btn-login">Net Banking</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container" style="padding:28px 0;">
+  <h1>Corporate Banking — Internal Announcements</h1>
+  <p><span class="vuln">Intentionally vulnerable features below — lab only.</span></p>
+
+  <!-- ========== VULN: Reflected XSS via 'msg' param ===========
+       The announcements area reflects ?msg without encoding.
+       Students can practice detection and mitigation.
+  -->
+  <div class="announcements" style="margin-top:12px;">
+    <strong>Latest:</strong>
+    <div id="announce">
+      <script>
+        // Intentionally vulnerable reflection of 'msg' parameter.
+        const p = new URLSearchParams(location.search).get('msg') || 'Quarterly results published.';
+        // directly write raw HTML (vulnerable)
+        document.write('<div style="margin-top:8px;">' + p + '</div>');
+      </script>
+    </div>
+  </div>
+
+  <!-- ========== VULN: Unprotected salary change form (GET) ===========
+       Using GET to change sensitive data is insecure; no CSRF token.
+       This illustrates CSRF / improper method usage.
+  -->
+  <section style="margin-top:20px;">
+    <h2>Admin: Quick Salary Update (INSECURE)</h2>
+    <p style="color:#666">This form uses GET and no CSRF protection — intentionally insecure.</p>
+    <form method="GET" action="/admin/update-salary">
+      <label>Employee ID</label><input name="empid" />
+      <label>New Salary</label><input name="sal" />
+      <button>Update</button>
+    </form>
+  </section>
+
+  <!-- ========== EMPLOYEE LIST (with random pics + fake data) ========= -->
+  <h2 style="margin-top:26px;">Corporate Team</h2>
+  <table class="emp-table">
+    <thead><tr><th>Employee</th><th>Role</th><th>Office</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><img src="https://picsum.photos/seed/c1/80/80" style="width:60px;border-radius:6px;vertical-align:middle;margin-right:8px;"> K. Ramesh</td>
+        <td>Head — Corporate Sales</td>
+        <td>Mumbai</td>
+      </tr>
+      <tr>
+        <td><img src="https://picsum.photos/seed/c2/80/80" style="width:60px;border-radius:6px;vertical-align:middle;margin-right:8px;"> Sneha Iyer</td>
+        <td>Relationship Manager</td>
+        <td>Delhi</td>
+      </tr>
+      <tr>
+        <td><img src="https://picsum.photos/seed/c3/80/80" style="width:60px;border-radius:6px;vertical-align:middle;margin-right:8px;"> Amar Joshi</td>
+        <td>Credit Lead</td>
+        <td>Bengaluru</td>
+      </tr>
+    </tbody>
+  </table>
+
+</main>
+
+<footer>
+  <div class="container footer-grid">
+    <div><h3>Banking</h3><a>Savings</a><a>Cards</a></div>
+    <div><h3>Support</h3><a>Contact</a><a>Care</a></div>
+    <div><h3>Links</h3><a>Terms</a><a>Privacy</a></div>
+  </div>
+  <p class="footer-copy">© 2025 LabBank — LAB USE ONLY</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,352 @@
+/* ==============================
+   RESET & VARIABLES
+============================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Inter, Arial, sans-serif;
+}
+
+:root {
+  --primary: #0047b3;
+  --accent: #ffb400;
+  --bg: #f4f6fb;
+  --text: #1f1f1f;
+  --card: #ffffff;
+}
+
+/* ==============================
+   GENERAL
+============================== */
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.container {
+  width: 90%;
+  max-width: 1250px;
+  margin: auto;
+}
+
+a {
+  cursor: pointer;
+}
+
+/* ==============================
+   NAVBAR
+============================== */
+.navbar {
+  background: var(--primary);
+  padding: 16px 0;
+  color: #fff;
+}
+
+.nav-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 24px;
+  font-size: 15px;
+  transition: opacity 0.2s ease-in-out;
+}
+
+nav a:hover {
+  opacity: 0.7;
+}
+
+.btn-login {
+  background: var(--accent);
+  padding: 6px 14px;
+  border-radius: 4px;
+  color: #000 !important;
+  font-weight: 600;
+}
+
+/* ==============================
+   HERO SECTION
+============================== */
+.hero {
+  background: #fff;
+  padding: 80px 0;
+}
+
+.hero-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+}
+
+.hero h1 {
+  font-size: 45px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.hero p {
+  font-size: 18px;
+  margin: 14px 0 22px;
+  line-height: 1.5;
+}
+
+.btn-primary,
+.btn-outline {
+  padding: 12px 26px;
+  border-radius: 6px;
+  font-size: 16px;
+  margin-right: 12px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+}
+
+.btn-outline {
+  background: none;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+
+/* ==============================
+   QUICK SERVICES SECTION
+============================== */
+.services {
+  padding: 70px 0;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+.service-card {
+  background: var(--card);
+  padding: 24px;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.10);
+  transition: transform 0.2s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+}
+
+.service-card img {
+  width: 60px;
+  margin-bottom: 12px;
+}
+
+/* ==============================
+   WHY CHOOSE US SECTION
+============================== */
+.why {
+  background: #fff;
+  padding: 75px 0;
+}
+
+.why-flex {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+.why h2 {
+  font-size: 32px;
+  margin-bottom: 14px;
+  color: var(--primary);
+}
+
+.why li {
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+
+/* ==============================
+   TESTIMONIAL SECTION
+============================== */
+.testimonials {
+  padding: 75px 0;
+  text-align: center;
+}
+
+.testimonial-grid {
+  display: flex;
+  gap: 25px;
+  margin-top: 25px;
+}
+
+.testimonial-card {
+  background: var(--card);
+  padding: 22px;
+  flex: 1;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+}
+
+/* ==============================
+   FOOTER (UPDATED / FIXED)
+============================== */
+footer {
+  background: var(--primary);
+  color: #fff;
+  padding: 50px 0 20px;
+  margin-top: 60px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+footer h3 {
+  margin-bottom: 14px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+footer a {
+  display: block;
+  opacity: 0.8;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+footer a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.footer-copy {
+  margin-top: 35px;
+  text-align: center;
+  opacity: 0.8;
+  font-size: 14px;
+}
+
+/* ==============================
+   AUTH FORMS (LOGIN / REGISTER)
+============================== */
+.auth-container {
+  background: var(--card);
+  width: 380px;
+  margin: 50px auto;
+  padding: 28px;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.10);
+}
+
+.auth-container.wider {
+  width: 480px;
+}
+
+.auth-form label {
+  font-weight: 600;
+}
+
+.auth-form input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 14px;
+}
+
+textarea {
+  min-height: 70px;
+  resize: vertical;
+}
+
+.subtitle {
+  margin-bottom: 15px;
+  color: #555;
+}
+
+.msg {
+  text-align: center;
+  color: #c00;
+  margin-top: 8px;
+}
+
+/* ==============================
+   RESPONSIVE FIXES
+============================== */
+@media (max-width: 900px) {
+  .hero-content, .why-flex, .testimonial-grid {
+    flex-direction: column;
+    text-align: center;
+  }
+/* dashboard layout */
+.dashboard-layout {
+  display: flex;
+  gap: 25px;
+  margin-top: 40px;
+}
+
+/* sidebar */
+.sidebar {
+  width: 220px;
+  background: var(--card);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+}
+.sidebar a {
+  display: block;
+  margin-bottom: 10px;
+  padding: 8px;
+  text-decoration: none;
+  color: var(--text);
+}
+.sidebar a:hover {
+  background: var(--bg);
+}
+
+/* account card */
+.account-card, .transaction-card, .transfer-box {
+  background: var(--card);
+  padding: 22px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+  margin-bottom: 25px;
+}
+
+/* transaction table */
+.transaction-card table {
+  width: 100%;
+  margin-top: 10px;
+}
+.transaction-card table th, td {
+  text-align: left;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+  .service-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .service-grid {
+    grid-template-columns: 1fr;
+  }
+}

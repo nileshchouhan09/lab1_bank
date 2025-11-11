@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Personal Banking - LabBank</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    .employees { display:grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap:16px; margin-top:18px; }
+    .emp-card { background:#fff; padding:12px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.06);}
+    .emp-card img{ width:100%; height:140px; object-fit:cover; border-radius:6px; }
+    .badge { display:inline-block; background:#ffb400; padding:4px 8px; border-radius:6px; font-weight:600; }
+    .vuln-note{ color:#8b0000; font-weight:600; margin-top:8px; }
+  </style>
+</head>
+<body>
+<header class="navbar">
+  <div class="container nav-flex">
+    <h2 class="logo">LabBank</h2>
+    <nav>
+      <a href="personal.html">Personal Banking</a>
+      <a href="corporate.html">Corporate</a>
+      <a href="loans.html">Loans</a>
+      <a href="investments.html">Investments</a>
+      <a href="login.html" class="btn-login">Net Banking</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container" style="padding:28px 0;">
+  <h1>Personal Banking — Employees</h1>
+  <p>Below is a directory of branch employees. <span class="badge">Intentionally vulnerable — LAB ONLY</span></p>
+
+  <!-- ========== VULN 1: Reflected XSS demonstration ===========
+       The ?search= query parameter is reflected back into the page without sanitization.
+       This is a *reflected XSS* pattern.
+       (Students: check URL like personal.html?search=<script>alert(1)</script> in lab.) -->
+  <div style="margin-top:12px;">
+    <form method="GET" action="personal.html">
+      <label>Search employees:</label>
+      <input name="search" placeholder="type name" />
+      <button>Search</button>
+    </form>
+
+    <div style="margin-top:8px;color:#444;">
+      Search results for: 
+      <strong id="searchResult">
+        <!-- injected below by server/browser reflection (intentionally unsafe) -->
+        <!-- The next line reflects the raw query parameter directly into the DOM -->
+        <script>
+          // intentionally reflect unsanitized 'search' param (vulnerable by design)
+          (function(){
+            const params = new URLSearchParams(location.search);
+            const s = params.get('search') || '';
+            // NOTE: This writes raw HTML — intentionally vulnerable to show reflected XSS.
+            document.write(s ? s : '<i>none</i>');
+          })();
+        </script>
+      </strong>
+    </div>
+  </div>
+
+  <!-- ========== Employee Directory (IDOR pattern) ===========
+       Links use a simple numeric id parameter without auth checks.
+       This simulates an Insecure Direct Object Reference (IDOR).
+       Students can observe how predictable IDs allow enumeration.
+  -->
+  <div class="employees">
+    <!-- Employee 1 -->
+    <div class="emp-card">
+      <img src="https://picsum.photos/seed/emp1/400/240" alt="Employee 1" style="max-width:100%; border-radius:6px;"/>
+      <h3>Priya Kulkarni</h3>
+      <p>Branch Manager — Mumbai</p>
+      <!-- IDOR-style link (intentionally insecure) -->
+      <a href="employee-profile.html?id=101">View profile</a>
+      <div class="vuln-note">VULN: ID=101 (predictable)</div>
+    </div>
+
+    <!-- Employee 2 -->
+    <div class="emp-card">
+      <img src="https://picsum.photos/seed/emp2/400/240" alt="Employee 2" style="max-width:100%; border-radius:6px;"/>
+      <h3>Rohan Mehta</h3>
+      <p>Customer Support — Pune</p>
+      <a href="employee-profile.html?id=102">View profile</a>
+      <div class="vuln-note">VULN: ID=102</div>
+    </div>
+
+    <!-- Employee 3 -->
+    <div class="emp-card">
+      <img src="https://picsum.photos/seed/emp3/400/240" alt="Employee 3" style="max-width:100%; border-radius:6px;"/>
+      <h3>Aisha Patel</h3>
+      <p>Credit Analyst — Delhi</p>
+      <a href="employee-profile.html?id=103">View profile</a>
+      <div class="vuln-note">VULN: ID=103</div>
+    </div>
+
+    <!-- Employee 4 -->
+    <div class="emp-card">
+      <img src="https://picsum.photos/seed/emp4/400/240" alt="Employee 4" style="max-width:100%; border-radius:6px;"/>
+      <h3>Vikram Singh</h3>
+      <p>Loans Officer — Jaipur</p>
+      <a href="employee-profile.html?id=104">View profile</a>
+      <div class="vuln-note">VULN: ID=104</div>
+    </div>
+  </div>
+
+  <!-- ========== VULN 2: Unsafe File Upload (client side) ===========
+       File upload accepts any extension; server side (in lab) might store to www/uploads without validation.
+       This creates potential for risky uploads in a real system. For lab: students should observe allowed extensions.
+  -->
+  <section style="margin-top:26px;">
+    <h2>Upload document (KYC)</h2>
+    <form id="unsafeUpload" enctype="multipart/form-data" method="POST" action="/upload">
+      <input type="file" id="kycFile" name="file" />
+      <p style="color:#666;font-size:13px;">(This upload endpoint is intentionally insecure in the lab server)</p>
+      <button type="submit">Upload</button>
+    </form>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container footer-grid">
+    <div><h3>Banking</h3><a>Savings Account</a><a>Credit Cards</a></div>
+    <div><h3>Support</h3><a>Contact Us</a><a>Customer Care</a></div>
+    <div><h3>Useful Links</h3><a>Terms</a><a>Privacy</a></div>
+  </div>
+  <p class="footer-copy">© 2025 LabBank — LAB USE ONLY</p>
+</footer>
+
+</body>
+</html>

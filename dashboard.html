@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - LabBank</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="app.js"></script>
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="container nav-flex">
+    <h2 class="logo">LabBank</h2>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="transfer.html">Transfer Funds</a>
+      <a onclick="logout()">Logout</a>
+    </nav>
+  </div>
+</header>
+
+<section>
+  <div class="container dashboard-layout">
+    
+    <aside class="sidebar">
+      <h3>Menu</h3>
+      <a href="dashboard.html">🏦 Dashboard</a>
+      <a href="transfer.html">💸 Transfer Funds</a>
+      <a onclick="logout()">🚪 Logout</a>
+    </aside>
+
+    <div class="dashboard-content">
+
+      <div class="account-card">
+        <h2>Account Summary</h2>
+        <p><strong>Account Holder:</strong> User</p>
+        <p><strong>Account Number:</strong> 4520 7813 9210</p>
+        <p><strong>Balance:</strong> ₹ <span id="balance">89,320.50</span></p>
+      </div>
+
+      <div class="transaction-card">
+        <h2>Recent Transactions</h2>
+        <table>
+          <tr><th>Date</th><th>Description</th><th>Amount</th></tr>
+          <tr><td>10 Nov</td><td>UPI Payment</td><td style="color:red;">- ₹1,299</td></tr>
+          <tr><td>08 Nov</td><td>Salary Credit</td><td style="color:green;">+ ₹45,000</td></tr>
+          <tr><td>04 Nov</td><td>ATM Withdrawal</td><td style="color:red;">- ₹5,000</td></tr>
+          <tr><td>02 Nov</td><td>Interest Credit</td><td style="color:green;">+ ₹340</td></tr>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="footer-copy">© 2025 LabBank • All Rights Reserved</p>
+</footer>
+
+</body>
+</html>

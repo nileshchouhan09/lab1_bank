@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Loans - LabBank</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    .loan-box{ background:#fff;padding:18px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+    .emp-grid{ display:flex; gap:14px; margin-top:14px; }
+    .emp-profile{ width:220px; background:#fff; padding:12px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.05); }
+  </style>
+</head>
+<body>
+<header class="navbar">
+  <div class="container nav-flex">
+    <h2 class="logo">LabBank</h2>
+    <nav>
+      <a href="personal.html">Personal</a>
+      <a href="corporate.html">Corporate</a>
+      <a href="loans.html">Loans</a>
+      <a href="investments.html">Investments</a>
+      <a href="login.html" class="btn-login">Net Banking</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container" style="padding:28px 0;">
+  <h1>Loans — Apply & Team</h1>
+
+  <!-- ========== VULN: CSRF demonstration ===========
+       The apply form has no CSRF token and uses standard POST to /apply.
+       In a real app this must be protected.
+  -->
+  <div class="loan-box">
+    <h3>Apply for Personal Loan</h3>
+    <form method="POST" action="/apply-loan">
+      <label>Full Name</label><input name="name" required />
+      <label>Amount (₹)</label><input name="amount" type="number" required />
+      <label>Tenure (months)</label><input name="tenure" type="number" required />
+      <button>Apply</button>
+    </form>
+    <p style="color:#666">Note: form is intentionally missing CSRF protection for lab exercises.</p>
+  </div>
+
+  <!-- ========== EMPLOYEES (random pics + fake info) ========= -->
+  <h2 style="margin-top:22px;">Loans Team</h2>
+  <div class="emp-grid">
+    <div class="emp-profile">
+      <img src="https://picsum.photos/seed/l1/320/200" style="width:100%; border-radius:6px;"/>
+      <h4>Neha Kapoor</h4>
+      <p>Loan Processing</p>
+      <p class="vuln-note">VULN: exposes internal email neha.k@labbank.internal (fake)</p>
+    </div>
+    <div class="emp-profile">
+      <img src="https://picsum.photos/seed/l2/320/200" style="width:100%; border-radius:6px;"/>
+      <h4>Manav Desai</h4>
+      <p>Underwriting</p>
+      <p class="vuln-note">VULN: publicizing internal contact (fake)</p>
+    </div>
+    <div class="emp-profile">
+      <img src="https://picsum.photos/seed/l3/320/200" style="width:100%; border-radius:6px;"/>
+      <h4>Rita Banerjee</h4>
+      <p>Verification Lead</p>
+      <p class="vuln-note">VULN: weak password hint stored client-side (for lab demo)</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container footer-grid">
+    <div><h3>Banking</h3><a>Savings</a><a>Cards</a></div>
+    <div><h3>Support</h3><a>Contact</a><a>Care</a></div>
+    <div><h3>Links</h3><a>Terms</a><a>Privacy</a></div>
+  </div>
+  <p class="footer-copy">© 2025 LabBank — LAB USE ONLY</p>
+</footer>
+</body>
+</html>

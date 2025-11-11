@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Register - LabBank</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css"/>
   <script defer src="app.js"></script>
 </head>
 <body>
@@ -20,7 +20,6 @@
   <p class="subtitle">Fill the form to complete onboarding</p>
 
   <form id="registerForm" class="auth-form" enctype="multipart/form-data">
-
     <label>Full Name*</label>
     <input type="text" id="regName" required />
 
@@ -48,9 +47,8 @@
     <label>Confirm Password*</label>
     <input type="password" id="regPasswordConfirm" required />
 
-    <button type="submit" class="btn-primary full">Submit</button>
-    <p id="register-msg" class="msg"></p>
-
+    <button type="submit" class="btn-primary full" id="regSubmit">Submit</button>
+    <p id="register-msg" class="msg" aria-live="polite"></p>
   </form>
 
   <p class="switch-screen">
